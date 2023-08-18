@@ -1,0 +1,7 @@
+@if(flashMessages.has('messages'))
+    <ul class="m-3 border border-success rounded text-success">
+        @each(message in flashMessages.get('messages'))
+            <li>{{ message }}</li>
+        @end
+    </ul>
+@endif

@@ -1,0 +1,7 @@
+@if(flashMessages.has('errors'))
+    <ul class="m-3 border border-danger rounded text-danger">
+        @each(error in flashMessages.get('errors'))
+            <li>{{ error }}</li>
+        @end
+    </ul>
+@endif
