@@ -1,0 +1,38 @@
+@layout('layouts/main')
+@set('title', 'Post')
+
+@section('body')
+<h1>Comment</h1>
+
+<hr/>
+
+@!form.open({
+    action: action,
+    method: 'POST',
+})
+    @!form.select({
+        label: 'Post',
+        name: 'postId',
+        value: comment.postId,
+        options: [
+            {label: '', value: ''},
+            ...posts.flatMap((post) => ({label: post.title, value: post.id}))
+        ],
+    })
+
+    @!form.input({
+        label: 'Name',
+        name: 'name',
+        value: comment.name,
+    })
+
+    @!form.textarea({
+        label: 'Content',
+        name: 'content',
+        value: comment.content,
+    })
+
+    @!form.submit()
+
+@!form.close()
+@end

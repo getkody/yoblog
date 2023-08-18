@@ -1,0 +1,76 @@
+@layout('layouts/main')
+@set('title', 'Post')
+
+@section('body')
+<h1>Post</h1>
+
+<hr/>
+
+@!form.open({
+    action: action,
+    method: 'POST',
+    with_file_upload: true,
+})
+
+    @if(auth.user.admin)
+        @!form.select({
+            label: 'User',
+            name: 'userId',
+            value: post.userId,
+            options: [
+                {label: '', value: ''},
+                ...users.flatMap((user) => ({label: user.name(), value: user.id}))
+            ],
+        })
+    @end
+
+    @!form.select({
+        label: 'Public',
+        name: 'public',
+        value: post.public ? 'true' : 'false',
+        options: [
+            {label: '', value: null},
+            {label: 'True', value: 'true'},
+            {label: 'False', value: 'false'},
+        ],
+    })
+
+    @!form.input({
+        label: 'Title',
+        name: 'title',
+        value: post.title,
+    })
+
+    <div class="p-3 mb-3 border rounded">
+        @!form.input({
+            label: 'Image',
+            name: 'image',
+            value: '',
+            type: 'file',
+        })
+        @if (post.image)
+            <a href="/uploads/{{ post.image }}" target="_blank">
+                <img src="/uploads/{{ post.image }}" class="img-fluid" style="max-height: 250px;" />
+            </a>
+            <div class="">
+                <input type="checkbox" class="" id="delete_image" name="delete_image">
+                Delete
+            </div>
+        @end    
+    </div>
+    
+    @!form.textarea({
+        label: 'Content',
+        name: 'content',
+        value: post.content,
+        rows: 10,
+    })
+
+    @!form.submit()
+
+    @if(post.id)
+        <a href="{{ route('posts.show', {id: post.id}) }}" class="btn btn-secondary">Show</a>
+    @end
+
+@!form.close()
+@end

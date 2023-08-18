@@ -1,0 +1,64 @@
+@layout('layouts/main')
+@set('title', 'Dashboard')
+
+@section('body')
+<h1>Dashboard</h1>
+
+<hr/>
+
+<div class="mb-4">
+    Hello <strong>{{ auth.user.name() }}</strong>, welcome to your dashboard.
+</div>
+
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+
+    @if(auth.user.admin)
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center text-bg-primary bg-gradient fs-2 mb-3 px-2 rounded">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <h3 class="fs-2 text-body-emphasis">Users ({{ usersCount }})</h3>
+
+            <p>
+                Users are people that have accounts.
+                Each account can login, and you can decide the details of these accounts, 
+                including whether they are active, and whether they are an administrator like you.
+            </p>
+
+            <a href="{{ route('users.index') }}" class="icon-link">Manage</a>
+        </div>
+    @end
+
+    <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center text-bg-primary bg-gradient fs-2 mb-3 px-2 rounded">
+            <i class="bi bi-file-earmark-post"></i>
+        </div>
+
+        <h3 class="fs-2 text-body-emphasis">Posts ({{ postsCount }})</h3>
+
+        <p>
+            Posts are articles that can be published to your web application.
+            You can set every detail about a post, including whether it is public or not.
+        </p>
+
+        <a href="{{ route('posts.index') }}" class="icon-link">Manage</a>
+    </div>
+
+    <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center text-bg-primary bg-gradient fs-2 mb-3 px-2 rounded">
+            <i class="bi bi-chat-left-text"></i>
+        </div>
+
+        <h3 class="fs-2 text-body-emphasis">Comments ({{ commentsCount }})</h3>
+
+        <p>
+            Comments allow you to manage comments from visitors.
+            You can manage the content of the comments.
+        </p>
+
+        <a href="{{ route('comments.index') }}" class="icon-link">Manage</a>
+    </div>
+    
+</div>
+@end

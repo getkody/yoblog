@@ -1,0 +1,41 @@
+@layout('layouts/main')
+@set('title', 'User')
+
+@section('body')
+<h1>User</h1>
+
+<hr/>
+
+@if(auth.user?.admin)
+    <div class="mb-3">
+        <label for="username" class="form-label">Active</label>
+        <div>{{ user.active }}</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="username" class="form-label">Admin</label>
+        <div>{{ user.admin }}</div>
+    </div>
+@end
+
+<div class="mb-3">
+    <label for="firstName" class="form-label">First Name</label>
+    <div>{{ user.firstName }}</div>
+</div>
+
+<div class="mb-3">
+    <label for="lastName" class="form-label">Last Name</label>
+    <div>{{ user.lastName }}</div>
+</div>
+
+<div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <div>{{ user.email }}</div>
+</div>
+
+<div class="mb-3">
+    <label for="email" class="form-label">Bio</label>
+    <div>{{{ markdown.parse(user.bio, {ghf: true}) }}}</div>
+</div>
+
+@end

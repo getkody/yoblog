@@ -1,0 +1,23 @@
+@layout('layouts/main')
+@set('title', 'Comment')
+
+@section('body')
+<h1>Comment</h1>
+
+<hr/>
+
+<div class="mb-3">
+    <label for="username" class="form-label">Post</label>
+    <div>{{ await comment.post.title }}</div>
+</div>
+
+<div class="mb-3">
+    <label for="email" class="form-label">Name</label>
+    <div>{{ comment.name }}</div>
+</div>
+
+<div class="mb-3">
+    <label for="email" class="form-label">Content</label>
+    <div>{{ comment.content }}</div>
+</div>
+@end

@@ -1,0 +1,80 @@
+@layout('layouts/main')
+@set('title', 'User')
+
+@section('body')
+<h1>User</h1>
+
+<hr/>
+
+@!form.open({
+    action: action,
+    method: 'POST',
+})
+
+    @if(auth.user && auth.user.admin)
+        @!form.select({
+            label: 'Active',
+            name: 'active',
+            value: user.active ? 'true' : 'false',
+            options: [
+                {label: '', value: null},
+                {label: 'True', value: 'true'},
+                {label: 'False', value: 'false'},
+            ],
+        })
+
+        @!form.select({
+            label: 'Admin',
+            name: 'admin',
+            value: user.admin ? 'true' : 'false',
+            options: [
+                {label: '', value: null},
+                {label: 'True', value: 'true'},
+                {label: 'False', value: 'false'},
+            ],
+        })
+    @end
+
+    @!form.input({
+        label: 'First name',
+        name: 'firstName',
+        value: user.firstName,
+    })
+
+    @!form.input({
+        label: 'Last name',
+        name: 'lastName',
+        value: user.lastName,
+    })
+
+    @!form.input({
+        label: 'Email',
+        name: 'email',
+        type: 'email',
+        value: user.email,
+    })
+
+    @!form.input({
+        label: 'Password',
+        name: 'password',
+        type: 'password',
+        value: '',
+    })
+
+    @!form.input({
+        label: 'Confirm Password',
+        name: 'password_confirmation',
+        type: 'password',
+        value: '',
+    })
+
+    @!form.textarea({
+        label: 'Biography',
+        name: 'bio',
+        value: user.bio,
+    })
+
+    @!form.submit()
+
+@!form.close()
+@end
