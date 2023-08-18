@@ -1,0 +1,7 @@
+@component('components/form/field', {
+    label: label,
+    name: name,
+    id: id ?? name,
+})
+    <textarea class="form-control" id="{{ id ?? name }}" name="{{ name }}" rows="{{ rows ?? 4 }}">{{ flashMessages.get(name, value) }}</textarea>
+@end

@@ -1,0 +1,51 @@
+@layout('layouts/main')
+@set('title', title)
+
+@section('body')
+<div class="row">
+    <div class="col">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="col text-end">
+        <a href="{{ route(routeNamePrefix + '.create') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i></a>
+    </div>
+</div>
+
+<hr/>
+
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        @each(field in fields)
+            @if (field)
+                <th scope="col">{{ field.label }}</th>
+            @end
+        @end
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+        @each((row, i) in rows)
+            <tr class="align-middle">
+                <th scope="row">{{ i + 1 }}</th>
+                @each(field in fields)
+                    @if (field)
+                        <th scope="col">{{{ field.onValue && row ? field.onValue(row) : row[field.field] }}}</th>
+                    @end
+                @end
+                <td class="col text-end w-25">
+                    <a href="{{ route(routeNamePrefix + '.show', [row.id]) }}" class="btn btn-primary"><i class="bi bi-eye"></i></a>
+
+                    <a href="{{ route(routeNamePrefix + '.edit', [row.id]) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+
+                    <form action="{{ route(routeNamePrefix + '.destroy', {id: row.id}, {qs: {_method: 'DELETE'}}) }}" method="post" class="d-inline">
+                        {{ csrfField() }}
+                        <button class="btn btn-danger" onclick="if (!confirm('Are you sure?')) event.preventDefault(); "><i class="bi bi-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        @end
+    </tbody>
+</table>
+@end

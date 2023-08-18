@@ -1,0 +1,9 @@
+<div class="mb-3">
+    <label for="{{ id }}" class="form-label">{{ label }}</label>
+
+    {{{ await $slots.main() }}}
+
+    @if (flashMessages.has('errors.' + name))
+        <small class="text-danger">{{ flashMessages.get('errors.' + name) }}</small>
+    @endif
+</div>

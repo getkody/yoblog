@@ -1,0 +1,7 @@
+@component('components/form/field', {
+    label: label,
+    name: name,
+    id: id ?? name,
+})
+    <input type="checkbox" class="form-control" id="{{ id ?? name }}" name="{{ name }}" {{ flashMessages.get(name, value) ? ' checked' : '' }}">
+@end

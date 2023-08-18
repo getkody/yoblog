@@ -1,0 +1,11 @@
+@component('components/form/field', {
+    label: label,
+    name: name,
+    id: id ?? name,
+})
+    <select class="form-control" id="{{ id ?? name }}" name="{{ name }}">
+        @each(option in options)
+            <option value="{{ option.value }}"{{ option.value == value ? ' selected' : ''}}>{{ option.label }}</option>
+        @end
+    </select>
+@end

@@ -1,0 +1,7 @@
+@component('components/form/field', {
+    label: label,
+    name: name,
+    id: id ?? name,
+})
+    <input type="{{ type ?? 'text' }}" class="form-control" id="{{ id ?? name }}" name="{{ name }}" value="{{ flashMessages.get(name, value) }}">
+@end

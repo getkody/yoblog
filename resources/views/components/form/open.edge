@@ -1,0 +1,4 @@
+<form action="{{ action }}" method="{{ method }}" enctype="{{ (with_file_upload ?? false) ? 'multipart/form-data' : '' }}">
+    {{ csrfField() }}
+
+    {{{ await $slots.main() }}}
